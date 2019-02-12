@@ -33,55 +33,42 @@ void setup(void) {
   //rotate screen
   tft.setRotation(1);
 
-  Serial.println("done");
-  delay(1000);
-
   tft.fillScreen(BLACK);
   
-  #define X_LABEL 12
-  #define X_VALUE 75
 
+  
+  //Eventually will be saved to eeprom
+  uint16_t setTemp = 1111;
+  uint16_t realTemp = 1000;
+  uint16_t timer = 10;
+  
   //Set temp
-        //Draw border
-         tft.drawRect(2, 2, tft.width()-4, (tft.height()/3)-2, GREEN);
-    
-        //Draw label
-            drawLabel(18, "Set Temp");
-    
-        //Draw number
-            drawValue(14, RED, "42.0");
+          //Draw border, label, and value
+            tft.drawRect(2, 2, tft.width()-4, (tft.height()/3)-2, GREEN);
+            drawLabel(18, "Set");
+            drawValue(Y_SETTEMP_VALUE, GREEN, setTemp);
 
 
 
   //Real temp
-          //Draw border
+        //Draw border, label, and value
           tft.drawRect(2 , 2+tft.height()/3, tft.width()-4, (tft.height()/3)-2, RED);
-    
-          //Draw label
-              drawLabel(62, "Real Temp");
-    
-          //Draw number
-              drawValue(58, GREEN, "42.0");
+          drawLabel(62, "Real");
+          drawValue(Y_REALTEMP_VALUE, RED, setTemp);
 
   
   //Timer
-          //Draw border
+        //Draw border, label, and value
           tft.drawRect(2, 2+2*(tft.height()/3), tft.width()-4, (tft.height()/3)-2, WHITE);
-    
-          //Draw label
-              drawLabel(104, "Timer");
-    
-          //Draw number
-              drawValue(100, WHITE, "42.0");
+          drawLabel(104, "Timer");
+          drawValue(100, WHITE, timer);
   
   Serial.println("done setup");
 }
 
 
 void loop() {
-
 }
-
 
 
 void drawLabel(byte y, String text){
@@ -91,16 +78,19 @@ void drawLabel(byte y, String text){
   tft.println(text);
 }
 
-void drawValue(byte y, uint16_t color,String text) {
+void drawValue(byte y, uint16_t color, uint16_t value) {
   tft.setCursor(X_VALUE, y);
   tft.setTextColor(color);
   tft.setTextSize(2);
-  tft.println("42.0");
+  tft.println(String(value));
 }
 
 
 
 ///////////////todo //////////////
-//1. Turn text write blocks into functions
-//2. FIgure out how to define shit in other classes
 //3. Figure out hardware spi
+//4. Connect rotary encoder
+//5. Figure out eeprom shit
+//6. Create FSM for pushbutton logic
+//7. Connect pusbutton
+//8. Figure out wheatstone bridge
