@@ -3,16 +3,8 @@
 #include <SPI.h>
 #include "definitions.h"
 
-// OPTION 1 (recommended) is to use the HARDWARE SPI pins, which are unique
-// to each board and not reassignable. For Arduino Uno: MOSI = pin 11 and
-// SCLK = pin 13. This is the fastest mode of operation and is required if
-// using the breakout board's microSD card.
-//Adafruit_ST7735 tft = Adafruit_ST7735(TFT_CS, TFT_DC, TFT_RST);
-
-
-// OPTION 2 lets you interface the display using ANY TWO or THREE PINS,
-// tradeoff being that performance is not as fast as hardware SPI above.
-Adafruit_ST7735 tft = Adafruit_ST7735(TFT_CS, TFT_DC, TFT_MOSI, TFT_SCLK, TFT_RST);
+//Initialize tft library, pins defined in definitions.h
+Adafruit_ST7735 tft = Adafruit_ST7735(TFT_CS, TFT_DC, TFT_RST);
 
 void setup(void) {
   Serial.begin(9600);
@@ -70,7 +62,6 @@ void setup(void) {
 void loop() {
 }
 
-
 void drawLabel(byte y, String text){
   tft.setCursor(X_LABEL, y);
   tft.setTextColor(WHITE);
@@ -85,12 +76,10 @@ void drawValue(byte y, uint16_t color, uint16_t value) {
   tft.println(String(value));
 }
 
-
-
 ///////////////todo //////////////
-//3. Figure out hardware spi
 //4. Connect rotary encoder
 //5. Figure out eeprom shit
 //6. Create FSM for pushbutton logic
 //7. Connect pusbutton
-//8. Figure out wheatstone bridge
+//8. Create screen updating logic
+//9. Figure out wheatstone bridge

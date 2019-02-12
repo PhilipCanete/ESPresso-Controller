@@ -1,7 +1,7 @@
 //Pin definitions
 #define TFT_CS        15
 #define TFT_RST        5 // Or set to -1 and connect to Arduino RESET pin
-#define TFT_DC         12
+#define TFT_DC         4
 #define TFT_MOSI 13  // Data out
 #define TFT_SCLK 14  // Clock out
 
